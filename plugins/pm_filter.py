@@ -1926,42 +1926,43 @@ async def auto_filter(client, msg, spoll=False):
     cur_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     time_difference = timedelta(hours=cur_time.hour, minutes=cur_time.minute, seconds=(cur_time.second+(cur_time.microsecond/1000000))) - timedelta(hours=curr_time.hour, minutes=curr_time.minute, seconds=(curr_time.second+(curr_time.microsecond/1000000)))
     remaining_seconds = "{:.2f}".format(time_difference.total_seconds())
-    # TEMPLATE = settings['template']
-    # if imdb:
-    #     cap = TEMPLATE.format(
-    #         query=search,
-    #         title=imdb['title'],
-    #         votes=imdb['votes'],
-    #         aka=imdb["aka"],
-    #         seasons=imdb["seasons"],
-    #         box_office=imdb['box_office'],
-    #         localized_title=imdb['localized_title'],
-    #         kind=imdb['kind'],
-    #         imdb_id=imdb["imdb_id"],
-    #         cast=imdb["cast"],
-    #         runtime=imdb["runtime"],
-    #         countries=imdb["countries"],
-    #         certificates=imdb["certificates"],
-    #         languages=imdb["languages"],
-    #         director=imdb["director"],
-    #         writer=imdb["writer"],
-    #         producer=imdb["producer"],
-    #         composer=imdb["composer"],
-    #         cinematographer=imdb["cinematographer"],
-    #         music_team=imdb["music_team"],
-    #         distributors=imdb["distributors"],
-    #         release_date=imdb['release_date'],
-    #         year=imdb['year'],
-    #         genres=imdb['genres'],
-    #         poster=imdb['poster'],
-    #         plot=imdb['plot'],
-    #         rating=imdb['rating'],
-    #         url=imdb['url'],
-    #         **locals()
-    #     )
-    # else:
-    if settings["button"]:
-        cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ {search}\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\nʀᴇsᴜʟᴛ sʜᴏᴡ ɪɴ ☞ {remaining_seconds} sᴇᴄᴏɴᴅs\n\nᴘᴏᴡᴇʀᴇᴅ ʙʏ ☞ : {message.chat.title} \n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+    TEMPLATE = script.IMDB_TEMPLATE_TXT
+    if imdb:
+        cap = TEMPLATE.format(
+            qurey=search,
+            title=imdb['title'],
+            votes=imdb['votes'],
+            aka=imdb["aka"],
+            seasons=imdb["seasons"],
+            box_office=imdb['box_office'],
+            localized_title=imdb['localized_title'],
+            kind=imdb['kind'],
+            imdb_id=imdb["imdb_id"],
+            cast=imdb["cast"],
+            runtime=imdb["runtime"],
+            countries=imdb["countries"],
+            certificates=imdb["certificates"],
+            languages=imdb["languages"],
+            director=imdb["director"],
+            writer=imdb["writer"],
+            producer=imdb["producer"],
+            composer=imdb["composer"],
+            cinematographer=imdb["cinematographer"],
+            music_team=imdb["music_team"],
+            distributors=imdb["distributors"],
+            release_date=imdb['release_date'],
+            year=imdb['year'],
+            genres=imdb['genres'],
+            poster=imdb['poster'],
+            plot=imdb['plot'],
+            rating=imdb['rating'],
+            url=imdb['url'],
+            **locals()
+        )
+        if not settings["button"]:
+            cap+="<b>\n\n<u>📚 Requested Files 👇</u></b>\n"
+            for file in files:
+                cap += f"<b>\n📁 <a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>[{get_size(file.file_size)}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file.file_name.split()))}\n</a></b>"
     else:
         # cap = f"<b>Hᴇʏ {message.from_user.mention}, Hᴇʀᴇ ɪs ᴛʜᴇ ʀᴇsᴜʟᴛ ғᴏʀ ʏᴏᴜʀ ᴏ̨ᴜᴇʀʏ {search} \n\n</b>"
         cap = f"<b>Hᴇʏ {message.from_user.mention}, Fᴏᴜɴᴅ {total_results} Rᴇsᴜʟᴛs ғᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search}\n\n</b>"
