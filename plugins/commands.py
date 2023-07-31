@@ -345,7 +345,7 @@ async def start(client, message):
                 )
             )
             filesarr.append(msg)
-        k = await client.send_message(chat_id = message.from_user.id, text=f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie Files/Videos will be deleted in <b><u>10 mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this ALL Files/Videos to your Saved Messages and Start Download there</i></b>")
+        k = await client.send_message(chat_id = message.from_user.id, text=f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nयह मूवी फ़ाइल/वीडियो 10 मिनट में डिलेट हो जाएगी 🫥 <i></b>(Due to Copyright Issues)</i>.\n\nThis Movie Files/Videos will be deleted in <b><u>10 mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>\n\n<b><i>कृपया इस फ़ाइल/वीडियो को अपने सेव मैसेज या किसी चैट में फॉरवर्ड कर ले और वहां डाउनलोड चालू करें\n\nPlease forward this file/video to your save message or any chat and start download there</i></b>")
         await asyncio.sleep(600)
         for x in filesarr:
             await x.delete()
